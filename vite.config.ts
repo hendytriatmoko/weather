@@ -14,8 +14,7 @@ import vitePluginVuePugIndentFix from "vite-plugin-vue-pug-indent-fix"
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    port: 91, // prod
-    // port: 555, // dev
+    port: 3553,
     host: '0.0.0.0',
   },
   plugins: [    
