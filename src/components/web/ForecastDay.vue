@@ -9,7 +9,7 @@
           div(class="flex items-center")
             div(class="mx-2 flex items-center") 
               IconMdiWaterPercent( width="25px" height="25px" color="#42a8d4") 
-              div 6%
+              div {{item.day.avghumidity}}%
             div(class="mx-2")
               img(:src="item.day.condition.icon" style="width:25px;height:25px" alt="alt")
             div(class="mx-2") {{Math.round(item.day.maxtemp_c)}}&degC / {{Math.round(item.day.mintemp_c)}}&degC
