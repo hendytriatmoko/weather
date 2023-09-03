@@ -177,7 +177,7 @@ export default {
     function hideSnackbar() {
       dataSnackbar.value = {
         text: '',
-        color: '#cc3939',
+        color: 'error',
         value: false,
       }
     }
@@ -223,7 +223,7 @@ export default {
         loadApi.value = false
         dataSnackbar.value = {
           text: 'Pencarian Tidak Ditemukan',
-          color: '#cc3939',
+          color: 'error',
           value: true,
         }
         setTimeout(() => {
