@@ -1,6 +1,7 @@
 <template lang="pug">
   div
     Header(@getPencarian="getWeather" :isSmallerThanSm="isSmallerThanSm")
+    Snackbar(:dataSnackbar="dataSnackbar" @snackbarFalse="hideSnackbar")
     div(v-if="isSmallerThanSm")
       div(v-if="loadApi")
         div(class="animate-pulse space-x-2 mx-2")
@@ -131,6 +132,11 @@ export default {
     const locationUser = ref(null)
     const error = ref(null)
     const loadApi = ref(true)
+    const dataSnackbar = ref({
+      text: 'Pencarian Tidak Ditemukan',
+      color: '#cc3939',
+      value: false,
+    })
 
     const chartData = ref({
       labels: [''],
@@ -148,13 +154,13 @@ export default {
     window.addEventListener('resize', () => {
       screenWidth.value = window.innerWidth
       updateBreakpoint()
-      console.log('isSmallerThanSm', isSmallerThanSm.value)
+      // console.log('isSmallerThanSm', isSmallerThanSm.value)
     })
     updateBreakpoint()
 
     // make a chart
     async function chartForecastTimeToday(dataForecast) {
-      console.log('test jalan')
+      // console.log('test jalan')
       const labels = []
       const data = []
       for (let i = 0; i < dataForecast.forecastday[0].hour.length; i++) {
@@ -164,6 +170,15 @@ export default {
       chartData.value = {
         labels: labels,
         data: data,
+      }
+    }
+
+    // hide snackbar
+    function hideSnackbar() {
+      dataSnackbar.value = {
+        text: '',
+        color: '#cc3939',
+        value: false,
       }
     }
 
@@ -197,15 +212,24 @@ export default {
         if (forecast.value) {
           tempForecastDay.value = forecast.value.forecastday[1]
           chartForecastTimeToday(forecast.value)
-          console.log('tempForecastDay', tempForecastDay.value)
+          // console.log('tempForecastDay', tempForecastDay.value)
         }
         loadApi.value = false
-        console.log('current', current.value)
-        console.log('location', location.value)
-        console.log('forecast', forecast.value)
+        // console.log('current', current.value)
+        // console.log('location', location.value)
+        // console.log('forecast', forecast.value)
       } catch (err) {
         NProgress.done()
-        console.log('err', err)
+        loadApi.value = false
+        dataSnackbar.value = {
+          text: 'Pencarian Tidak Ditemukan',
+          color: '#cc3939',
+          value: true,
+        }
+        setTimeout(() => {
+          hideSnackbar()
+        }, 3000)
+        // console.log('err', err)
       }
     }
 
@@ -235,6 +259,7 @@ export default {
 
     return {
       loadApi,
+      dataSnackbar,
       screenWidth,
       isSmallerThanSm,
       locationUser,
