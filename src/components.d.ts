@@ -16,6 +16,7 @@ declare module 'vue' {
     IconMdiWeatherSunsetUp: typeof import('~icons/mdi/weather-sunset-up')['default']
     IconMdiWeatherWindy: typeof import('~icons/mdi/weather-windy')['default']
     LineChart: typeof import('./components/LineChart.vue')['default']
+    Skeleton: typeof import('./components/Skeleton.vue')['default']
     WebCurrent: typeof import('./components/web/Current.vue')['default']
     WebForecastDay: typeof import('./components/web/ForecastDay.vue')['default']
     WebForecastHour: typeof import('./components/web/ForecastHour.vue')['default']
